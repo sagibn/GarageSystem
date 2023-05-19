@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         { 
-            return string.Format("Wheel manufacture name: {0}, current air pressure: {1}, max air pressure: {2}"
+            return string.Format("wheel manufacture name: {0}, current air pressure: {1}, max air pressure: {2}"
                 , m_ManufactureName, m_CurrAirPressure, m_MaxAirPressure);
         }
     }
