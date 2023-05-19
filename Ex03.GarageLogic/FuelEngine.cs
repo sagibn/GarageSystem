@@ -12,11 +12,11 @@ namespace Ex03.GarageLogic
         Octan96,
         Octan98,
     }
-    public class Fuel : EnergySource
+    public class FuelEngine : EnergySource
     {
         private eFuelType m_FuelType;
 
-        public Fuel(eFuelType i_FuelType, float i_CurrFuel, float i_MaxFuel) : base(i_CurrFuel, i_MaxFuel)
+        public FuelEngine(eFuelType i_FuelType, float i_CurrFuel, float i_MaxFuel) : base(i_CurrFuel, i_MaxFuel)
         {
             m_FuelType = i_FuelType;
         }
@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Fuel engine: fuel type-{0} | remaining fuel in the tank-{1}% ({2} liters.)", m_FuelType, EnergyPercentage, CurrEnergy);
+            return string.Format("Fuel engine: fuel type-{0}, remaining fuel in the tank-{1}% ({2} liters.)", m_FuelType, EnergyPercentage, CurrEnergy);
         }
     }
 }
