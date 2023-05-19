@@ -39,6 +39,11 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public void InflateTireToMax()
+        {
+            InflateTire(m_MaxAirPressure - m_CurrAirPressure);
+        }
+
         public override string ToString()
         { 
             return string.Format("wheel manufacture name: {0}, current air pressure: {1}, max air pressure: {2}"
