@@ -29,14 +29,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void AddFuel(float i_FuelToAdd, eFuelType i_FuelType)
+        public void AddFuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
             if (!m_FuelType.Equals(i_FuelType))
             {
                 throw new ArgumentException("Provided wrong fuel type.");
             }
 
-            AddEnergy(i_FuelToAdd);
+            AddEnergy(i_AmountOfFuelToAdd);
         }
 
         public override string ToString()

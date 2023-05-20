@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic.Properties;
+using System.Linq;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
             m_VehicleGenerator = new VehicleGenerator();
             m_Services = new Dictionary<int, string>
             {
-                { 1, "Add new car to the garage." },
+                { 1, "Add new vehicle to the garage." },
                 { 2, "Display the list of the license numbers of the vehicles, by their status." },
                 { 3, "Change the status of the vehicle." },
                 { 4, "Inflate tires to maximum." },
@@ -35,6 +35,119 @@ namespace Ex03.GarageLogic
                 { 7, "Display vehicle's information." },
                 { 8, "Exit." }
             };
+        }
+
+        public void AddVehicleToGarage(eVehicleTypes i_VehicleTypes, VehicleProperties i_VehicleProperties, string i_OwnerName, string i_PhoneNumber)
+        {
+            bool vehicleExists = CheckIfVehicleExists(i_VehicleProperties.LicenseNumber);
+
+            if(vehicleExists)
+            {
+                throw new VehicleAlreadyExistsException(i_VehicleProperties.LicenseNumber);
+            }
+
+            Vehicle vehicle = m_VehicleGenerator.GenerateVehicle(i_VehicleTypes, i_VehicleProperties);
+            CarDetails newCustomer = new CarDetails(i_OwnerName, i_PhoneNumber, vehicle);
+
+            m_CustomerListByLicenseNumber.Add(newCustomer.Vehicle.LicenceNumber, newCustomer);
+        }
+
+        public bool CheckIfVehicleExists(string i_LicenseNumber)
+        {
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+
+            if(vehicleExists)
+            {
+                customer.VehicleStatus = eVehicleStatus.InRepair;
+            }
+
+            return vehicleExists;
+        }
+
+        public List<string> FilterLicenseNumberByStatus(eVehicleStatus? i_VehicleStatus)
+        {
+            List<string> licenseNumbers = new List<string>();
+
+            if(!i_VehicleStatus.HasValue)
+            {
+                foreach(CarDetails customer in m_CustomerListByLicenseNumber.Values)
+                {
+                    licenseNumbers.Add(customer.Vehicle.LicenceNumber);
+                }
+            }
+            else
+            {
+                foreach(CarDetails customer in m_CustomerListByLicenseNumber.Values)
+                {
+                    if(customer.VehicleStatus == i_VehicleStatus)
+                    {
+                        licenseNumbers.Add(customer.Vehicle.LicenceNumber);
+                    }
+                }
+            }
+
+            return licenseNumbers;
+        }
+
+        public void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewVehicleStatus)
+        {
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+
+            if(!vehicleExists)
+            {
+                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
+            }
+
+            customer.VehicleStatus = i_NewVehicleStatus;
+        }
+
+        public void InflateTiresToMax(string i_LicenseNumber)
+        {
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+
+            if(!vehicleExists)
+            {
+                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
+            }
+
+            foreach(Wheel wheel in customer.Vehicle.Wheels)
+            {
+                wheel.InflateTireToMax();
+            }
+        }
+
+        public void Refuel(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuelToAdd)
+        {
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+
+            if(!vehicleExists)
+            {
+                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
+            }
+
+            if(customer.Vehicle.Engine is FuelEngine fuelEngine)
+            {
+                fuelEngine.AddFuel(i_AmountOfFuelToAdd, i_FuelType);
+            }
+            else
+            {
+                throw new Exception("Trying to add fuel to an electric engine.");
+            }
+        }
+
+        public void Recharge(string i_LicenseNumber, float i_MinutesToCharge)
+        {
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+
+            if(!vehicleExists)
+            {
+                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
+            }
+
+            if(customer.Vehicle.Engine is ElectricEngine electricEngine)
+            {
+                electricEngine.ChargeBattery(i_MinutesToCharge / 60);
+            }
         }
     }
 }

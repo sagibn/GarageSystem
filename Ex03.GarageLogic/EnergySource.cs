@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Exceptions;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {

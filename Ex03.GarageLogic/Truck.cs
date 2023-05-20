@@ -1,5 +1,4 @@
 ﻿using System;
-using Ex03.GarageLogic.Properties;
 
 namespace Ex03.GarageLogic
 {
