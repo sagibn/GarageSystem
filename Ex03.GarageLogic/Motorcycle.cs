@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ex03.GarageLogic.Properties;
 
 namespace Ex03.GarageLogic
 {
@@ -18,14 +19,12 @@ namespace Ex03.GarageLogic
         eLicenseType m_LicenseType;
         int m_EngineCapacity;
 
-        public Motorcycle(eLicenseType i_LicenseType, int i_EngineCapacity,
-            string i_ManufactureName, float i_CurrAirPressure,
-            string i_ModelName, string i_LicenceNumber, EnergySource i_Engine) 
-            : base(i_ModelName, i_LicenceNumber, i_Engine)
+        public Motorcycle(MotorcycleProperties i_MotorcycleProperties, EnergySource i_Engine) 
+            : base(i_MotorcycleProperties.ModelName, i_MotorcycleProperties.LicenseNumber, i_Engine)
         {
-            m_LicenseType = i_LicenseType;
-            m_EngineCapacity = i_EngineCapacity;
-            SetWheels(2, i_ManufactureName, i_CurrAirPressure, 31.0f);
+            m_LicenseType = i_MotorcycleProperties.LicenseType;
+            m_EngineCapacity = i_MotorcycleProperties.EngineCapacity;
+            SetWheels(2, i_MotorcycleProperties.WheelManufactureName, i_MotorcycleProperties.WheelCurrAirPressure, i_MotorcycleProperties.WheelMaxAirPressure);
         }
 
         public eLicenseType LicenseType

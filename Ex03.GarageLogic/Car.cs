@@ -1,4 +1,5 @@
 ﻿using System;
+using Ex03.GarageLogic.Properties;
 
 namespace Ex03.GarageLogic
 {
@@ -12,22 +13,28 @@ namespace Ex03.GarageLogic
 	public class Car : Vehicle
 	{
 		int m_NumOfDoors;
-		eCarColor m_ColorOfCar;
+		eCarColor m_CarColor;
 
-		public Car(eCarColor i_CarColor, int i_NumOfDoors, string i_ManufactureName, float i_CurrAirPressure, string i_ModelName,
-			string i_LicenceNumber, EnergySource i_Engine)
-			: base(i_ModelName, i_LicenceNumber, i_Engine)
+		public Car(CarProperties i_CarProperties, EnergySource i_Engine)
+			: base(i_CarProperties.ModelName, i_CarProperties.LicenseNumber, i_Engine)
 		{
-			SetWheels(5, i_ManufactureName, i_CurrAirPressure, 33.0f);
-			m_ColorOfCar = i_CarColor;
-			m_NumOfDoors = i_NumOfDoors;
+			SetWheels(5, i_CarProperties.WheelManufactureName, i_CarProperties.WheelCurrAirPressure, i_CarProperties.WheelMaxAirPressure);
+			m_CarColor = i_CarProperties.CarColor;
+			if(i_CarProperties.NumOfDoors > 1 || i_CarProperties.NumOfDoors < 6)
+            {
+				m_NumOfDoors = i_CarProperties.NumOfDoors;
+			}
+            else
+            {
+				throw new Exceptions.ValueOutOfRangeException(2, 5, i_CarProperties.NumOfDoors);
+            }
 		}
 
 		public eCarColor CarColor
 		{
 			get
 			{
-				return m_ColorOfCar;
+				return m_CarColor;
 			}
 		}
 
@@ -45,7 +52,7 @@ namespace Ex03.GarageLogic
 {0}
 {1}
 Number of doors: {2}
-Color of the car: {3}", base.GetVehicleData(), Engine.ToString(), m_NumOfDoors, m_ColorOfCar);
+Color of the car: {3}", base.GetVehicleData(), Engine.ToString(), m_NumOfDoors, m_CarColor);
 
 			return carData;
 		}

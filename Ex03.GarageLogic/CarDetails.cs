@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 {
     public enum eVehicleStatus
     {
-        InWork,
+        InRepair,
         Fixed,
         Paid
     }
@@ -18,13 +18,13 @@ namespace Ex03.GarageLogic
         private string m_OwnerName;
         private string m_PhoneNumber;
         private Vehicle m_Vehicle;
-        private eVehicleStatus m_Status;
+        private eVehicleStatus m_VehicleStatus;
 
-        public CarDetails(string i_OwnerName, string i_PhoneNumber, eVehicleStatus i_Status, Vehicle i_Vehicle)
+        public CarDetails(string i_OwnerName, string i_PhoneNumber, Vehicle i_Vehicle)
         {
             m_OwnerName = i_OwnerName;
             m_PhoneNumber = i_PhoneNumber;
-            m_Status = i_Status;
+            m_VehicleStatus = eVehicleStatus.InRepair;
             m_Vehicle = i_Vehicle;
         }
 
@@ -52,16 +52,26 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public eVehicleStatus Status
+        public eVehicleStatus VehicleStatus
         {
             get 
             {
-                return m_Status; 
+                return m_VehicleStatus; 
             }
             set 
             {
-                m_Status = value; 
+                m_VehicleStatus = value; 
             }
+        }
+
+        public override string ToString()
+        {
+            string data = string.Format(@"Owner name:
+{1}
+Vehical status: {2}{3}",
+            m_OwnerName, m_Vehicle.GetVehicleData(), m_VehicleStatus, Environment.NewLine);
+
+            return data;
         }
     }
 }

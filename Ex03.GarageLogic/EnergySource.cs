@@ -14,6 +14,15 @@ namespace Ex03.GarageLogic
 
         public EnergySource(float i_CurrEnergy, float i_MaxEnergy)
         {
+            if(i_MaxEnergy <= 0 || i_CurrEnergy <= 0)
+            {
+                throw new ArgumentException();
+            }
+            else if (i_CurrEnergy < i_MaxEnergy)
+            {
+                throw new ValueOutOfRangeException(0, i_MaxEnergy, i_CurrEnergy);
+            }
+
             m_CurrEnergy = i_CurrEnergy;
             m_MaxEnergy = i_MaxEnergy;
             UpdateEnergyPercentage();

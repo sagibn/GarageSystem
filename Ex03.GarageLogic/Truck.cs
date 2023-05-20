@@ -1,4 +1,5 @@
 ﻿using System;
+using Ex03.GarageLogic.Properties;
 
 namespace Ex03.GarageLogic
 {
@@ -8,13 +9,12 @@ namespace Ex03.GarageLogic
 		bool m_HazardElements;
 		float m_CargoVolume;
 
-		public Car(string i_ManufactureName, float i_CurrAirPressure, 
-			string i_ModelName, string i_LicenceNumber, EnergySource i_Engine, 
-			float i_CargoVolume, bool i_HazardElements) : base(i_ModelName, i_LicenceNumber, i_Engine)
+		public Truck(TruckProperties i_TruckProperties, EnergySource i_Engine)
+			: base(i_TruckProperties.ModelName, i_TruckProperties.LicenseNumber, i_Engine)
 		{
-			SetWheels(14, i_ManufactureName, i_CurrAirPressure, 26.0f);
-			m_CargoVolume = i_CargoVolume;
-			m_HazardElements = i_HazardElements;
+			SetWheels(14, i_TruckProperties.WheelManufactureName, i_TruckProperties.WheelCurrAirPressure, i_TruckProperties.WheelMaxAirPressure);
+			m_CargoVolume = i_TruckProperties.CargoVolume;
+			m_HazardElements = i_TruckProperties.HazardElements;
 		}
 
 		public bool HazardElements
@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
 			}
 		}
 
-		public bool CargoVolume
+		public float CargoVolume
 		{
 			get
 			{
