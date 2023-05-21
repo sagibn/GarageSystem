@@ -34,6 +34,11 @@ namespace Ex03.GarageLogic
             {
                 return m_OwnerName; 
             }
+
+            set
+            {
+                m_OwnerName = value;
+            }
         }
 
         public string PhoneNumber
@@ -41,6 +46,11 @@ namespace Ex03.GarageLogic
             get 
             {
                 return m_PhoneNumber;
+            }
+
+            set
+            {
+                m_PhoneNumber = value;
             }
         }
 

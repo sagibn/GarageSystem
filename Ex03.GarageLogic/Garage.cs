@@ -56,7 +56,7 @@ namespace Ex03.GarageLogic
             Vehicle vehicle = m_VehicleGenerator.GenerateVehicle(i_VehicleTypes, i_VehicleProperties);
             CustomerInfo newCustomer = new CustomerInfo(i_OwnerName, i_PhoneNumber, vehicle);
 
-            m_CustomerListByLicenseNumber.Add(newCustomer.Vehicle.LicenceNumber, newCustomer);
+            m_CustomerListByLicenseNumber.Add(newCustomer.Vehicle.LicenseNumber, newCustomer);
         }
 
         public bool CheckIfVehicleExists(string i_LicenseNumber)
@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
             {
                 foreach(CustomerInfo customer in m_CustomerListByLicenseNumber.Values)
                 {
-                    licenseNumbers.Add(customer.Vehicle.LicenceNumber);
+                    licenseNumbers.Add(customer.Vehicle.LicenseNumber);
                 }
             }
             else
@@ -88,7 +88,7 @@ namespace Ex03.GarageLogic
                 {
                     if(customer.VehicleStatus == i_VehicleStatus)
                     {
-                        licenseNumbers.Add(customer.Vehicle.LicenceNumber);
+                        licenseNumbers.Add(customer.Vehicle.LicenseNumber);
                     }
                 }
             }

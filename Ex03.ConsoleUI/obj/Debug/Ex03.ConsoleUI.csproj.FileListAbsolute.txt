@@ -1,0 +1,4 @@
+C:\programing\23B\Ex3\B23 Ex03 OfirCohen 208711234 SagiBenNoon 206446288\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.AssemblyReference.cache
+C:\programing\23B\Ex3\B23 Ex03 OfirCohen 208711234 SagiBenNoon 206446288\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache
+C:\programing\23B\Ex3\B23 Ex03 Ofir 208711234 Sagi 206446288\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.AssemblyReference.cache
+C:\programing\23B\Ex3\B23 Ex03 Ofir 208711234 Sagi 206446288\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache

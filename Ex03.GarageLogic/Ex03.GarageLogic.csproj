@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomerInfo.cs" />
+    <Compile Include="Exceptions\UnableToCreateVehicleException.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="Exceptions\VehicleAlreadyExistsException.cs" />
     <Compile Include="Garage.cs" />

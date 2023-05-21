@@ -5,8 +5,8 @@ namespace Ex03.GarageLogic.Exceptions
 {
     public class ValueOutOfRangeException : Exception
     {
-        private float m_MinValue;
-        private float m_MaxValue;
+        private readonly float m_MinValue;
+        private readonly float m_MaxValue;
         private const string m_ValueOutOfRangeExceptionMessage =
             "Trying to put {2}. The value must be between {0} and {1}.";
 
