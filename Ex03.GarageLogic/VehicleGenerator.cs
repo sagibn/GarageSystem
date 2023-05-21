@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     {
         public Vehicle GenerateVehicle(Garage.eVehicleTypes i_VehicleType, VehicleProperties i_VehicleProperties)
         {
-            Vehicle vehicle = null;
+            Vehicle vehicle;
 
             if(i_VehicleType == Garage.eVehicleTypes.FuelCar && (i_VehicleProperties is CarProperties fuelCarProperties))
             {
@@ -28,10 +28,10 @@ namespace Ex03.GarageLogic
                 EnergySource electricEngine = new ElectricEngine(i_VehicleProperties.CurrEnergy, 2.6f);
                 vehicle = new Motorcycle(electricMotorcycleProperties, electricEngine);
             }
-            else if(i_VehicleType == Garage.eVehicleTypes.FuelTruck && (i_VehicleProperties is TruckProperties truckProperties))
+            else if(i_VehicleType == Garage.eVehicleTypes.FuelTruck && (i_VehicleProperties is TruckProperties FuelTruckProperties))
             {
                 EnergySource fuelEngine = new FuelEngine(eFuelType.Soler, i_VehicleProperties.CurrEnergy, 135f);
-                vehicle = new Truck(truckProperties, fuelEngine);
+                vehicle = new Truck(FuelTruckProperties, fuelEngine);
             }
             else
             {
