@@ -13,14 +13,14 @@ namespace Ex03.GarageLogic
         Fixed,
         Paid
     }
-    public class CarDetails
+    public class CustomerInfo
     {
         private string m_OwnerName;
         private string m_PhoneNumber;
         private Vehicle m_Vehicle;
         private eVehicleStatus m_VehicleStatus;
 
-        public CarDetails(string i_OwnerName, string i_PhoneNumber, Vehicle i_Vehicle)
+        public CustomerInfo(string i_OwnerName, string i_PhoneNumber, Vehicle i_Vehicle)
         {
             m_OwnerName = i_OwnerName;
             m_PhoneNumber = i_PhoneNumber;

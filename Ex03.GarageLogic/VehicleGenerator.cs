@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -35,6 +32,10 @@ namespace Ex03.GarageLogic
             {
                 EnergySource fuelEngine = new FuelEngine(eFuelType.Soler, i_VehicleProperties.CurrEnergy, 135f);
                 vehicle = new Truck(truckProperties, fuelEngine);
+            }
+            else
+            {
+                throw new UnableToCreateVehicleException("Cannot create vehicle with the provided vehicle type and properties.");
             }
 
             return vehicle;

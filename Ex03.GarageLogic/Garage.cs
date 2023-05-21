@@ -98,26 +98,16 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewVehicleStatus)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
-
-            if(!vehicleExists)
-            {
-                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
-            }
+            CustomerInfo customer = GetCustomer(i_LicenseNumber);
 
             customer.VehicleStatus = i_NewVehicleStatus;
         }
 
         public void InflateTiresToMax(string i_LicenseNumber)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
+            CustomerInfo customer = GetCustomer(i_LicenseNumber);
 
-            if(!vehicleExists)
-            {
-                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
-            }
-
-            foreach(Wheel wheel in customer.Vehicle.Wheels)
+            foreach (Wheel wheel in customer.Vehicle.Wheels)
             {
                 wheel.InflateTireToMax();
             }
@@ -125,14 +115,9 @@ namespace Ex03.GarageLogic
 
         public void Refuel(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuelToAdd)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
+            CustomerInfo customer = GetCustomer(i_LicenseNumber);
 
-            if(!vehicleExists)
-            {
-                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
-            }
-
-            if(customer.Vehicle.Engine is FuelEngine fuelEngine)
+            if (customer.Vehicle.Engine is FuelEngine fuelEngine)
             {
                 fuelEngine.AddFuel(i_AmountOfFuelToAdd, i_FuelType);
             }
@@ -144,14 +129,9 @@ namespace Ex03.GarageLogic
 
         public void Recharge(string i_LicenseNumber, float i_MinutesToCharge)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
+            CustomerInfo customer = GetCustomer(i_LicenseNumber);
 
-            if(!vehicleExists)
-            {
-                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
-            }
-
-            if(customer.Vehicle.Engine is ElectricEngine electricEngine)
+            if (customer.Vehicle.Engine is ElectricEngine electricEngine)
             {
                 electricEngine.ChargeBattery(i_MinutesToCharge / 60.0f);
             }
@@ -159,16 +139,22 @@ namespace Ex03.GarageLogic
 
         public string DisplayVehicleInformation(string i_LicenseNumber)
         {
+            CustomerInfo customer = GetCustomer(i_LicenseNumber);
+            string fullVehicleData = customer.ToString();
+
+            return fullVehicleData;
+        }
+
+        private CustomerInfo GetCustomer(string i_LicenseNumber)
+        {
             bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
-            if(!vehicleExists)
+            if (!vehicleExists)
             {
                 throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
             }
 
-            string fullVehicleData = customer.ToString();
-
-            return fullVehicleData;
+            return customer;
         }
     }
 }
