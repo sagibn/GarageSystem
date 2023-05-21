@@ -13,9 +13,9 @@ namespace Ex03.GarageLogic
         {
             if(i_MaxEnergy <= 0 || i_CurrEnergy <= 0)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("The amount of energy cannot be an unnatural number.");
             }
-            else if (i_CurrEnergy < i_MaxEnergy)
+            else if (i_CurrEnergy > i_MaxEnergy)
             {
                 throw new ValueOutOfRangeException(0, i_MaxEnergy, i_CurrEnergy);
             }
