@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Electric engine: remaining fuel in the tank-{0}% ({1} liters.)", EnergyPercentage, CurrEnergy);
+            return string.Format("Electric engine: remaining battery in the tank-{0}% ({1} hours.)", EnergyPercentage, CurrEnergy);
         }
     }
 }

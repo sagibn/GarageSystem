@@ -1,6 +1,6 @@
 ﻿
 
-namespace Ex03.GarageLogic.Properties
+namespace Ex03.GarageLogic
 {
     public class CarProperties : VehicleProperties
     {

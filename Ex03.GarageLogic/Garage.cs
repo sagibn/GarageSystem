@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
@@ -16,7 +15,7 @@ namespace Ex03.GarageLogic
             FuelTruck
         }
 
-        private Dictionary<string, CarDetails> m_CustomerListByLicenseNumber;
+        private Dictionary<string, CustomerInfo> m_CustomerListByLicenseNumber;
         private VehicleGenerator m_VehicleGenerator;
         private Dictionary<int, string> m_Services;
 
@@ -47,14 +46,14 @@ namespace Ex03.GarageLogic
             }
 
             Vehicle vehicle = m_VehicleGenerator.GenerateVehicle(i_VehicleTypes, i_VehicleProperties);
-            CarDetails newCustomer = new CarDetails(i_OwnerName, i_PhoneNumber, vehicle);
+            CustomerInfo newCustomer = new CustomerInfo(i_OwnerName, i_PhoneNumber, vehicle);
 
             m_CustomerListByLicenseNumber.Add(newCustomer.Vehicle.LicenceNumber, newCustomer);
         }
 
         public bool CheckIfVehicleExists(string i_LicenseNumber)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
             if(vehicleExists)
             {
@@ -70,14 +69,14 @@ namespace Ex03.GarageLogic
 
             if(!i_VehicleStatus.HasValue)
             {
-                foreach(CarDetails customer in m_CustomerListByLicenseNumber.Values)
+                foreach(CustomerInfo customer in m_CustomerListByLicenseNumber.Values)
                 {
                     licenseNumbers.Add(customer.Vehicle.LicenceNumber);
                 }
             }
             else
             {
-                foreach(CarDetails customer in m_CustomerListByLicenseNumber.Values)
+                foreach(CustomerInfo customer in m_CustomerListByLicenseNumber.Values)
                 {
                     if(customer.VehicleStatus == i_VehicleStatus)
                     {
@@ -91,7 +90,7 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewVehicleStatus)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
             if(!vehicleExists)
             {
@@ -103,7 +102,7 @@ namespace Ex03.GarageLogic
 
         public void InflateTiresToMax(string i_LicenseNumber)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
             if(!vehicleExists)
             {
@@ -118,7 +117,7 @@ namespace Ex03.GarageLogic
 
         public void Refuel(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuelToAdd)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
             if(!vehicleExists)
             {
@@ -137,7 +136,7 @@ namespace Ex03.GarageLogic
 
         public void Recharge(string i_LicenseNumber, float i_MinutesToCharge)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
             if(!vehicleExists)
             {
@@ -152,7 +151,7 @@ namespace Ex03.GarageLogic
 
         public string DisplayVehicleInformation(string i_LicenseNumber)
         {
-            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 
             if(!vehicleExists)
             {
