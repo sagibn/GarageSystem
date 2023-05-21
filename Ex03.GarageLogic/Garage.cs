@@ -25,14 +25,14 @@ namespace Ex03.GarageLogic
             m_VehicleGenerator = new VehicleGenerator();
             m_Services = new Dictionary<int, string>
             {
-                { 1, "Add new vehicle to the garage." },
-                { 2, "Display the list of the license numbers of the vehicles, by their status." },
-                { 3, "Change the status of the vehicle." },
-                { 4, "Inflate tires to maximum." },
-                { 5, "Refuel a vehicle." },
-                { 6, "Rechange a vehicle." },
-                { 7, "Display vehicle's information." },
-                { 8, "Exit." }
+                { 1, "1. Add new vehicle to the garage." },
+                { 2, "2. Display the list of the license numbers of the vehicles, by their status." },
+                { 3, "3. Change the status of the vehicle." },
+                { 4, "4. Inflate tires to maximum." },
+                { 5, "5. Refuel a vehicle." },
+                { 6, "6. Rechange a vehicle." },
+                { 7, "7. Display vehicle's information." },
+                { 8, "8. Exit." }
             };
         }
 
