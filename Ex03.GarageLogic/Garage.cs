@@ -36,6 +36,14 @@ namespace Ex03.GarageLogic
             };
         }
 
+        public Dictionary<int, string> Services
+        {
+            get
+            {
+                return m_Services;
+            }
+        }
+
         public void AddVehicleToGarage(eVehicleTypes i_VehicleTypes, VehicleProperties i_VehicleProperties, string i_OwnerName, string i_PhoneNumber)
         {
             bool vehicleExists = CheckIfVehicleExists(i_VehicleProperties.LicenseNumber);
@@ -145,7 +153,7 @@ namespace Ex03.GarageLogic
 
             if(customer.Vehicle.Engine is ElectricEngine electricEngine)
             {
-                electricEngine.ChargeBattery(i_MinutesToCharge / 60);
+                electricEngine.ChargeBattery(i_MinutesToCharge / 60.0f);
             }
         }
 

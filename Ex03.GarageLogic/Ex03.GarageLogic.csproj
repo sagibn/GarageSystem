@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E682B06C-A53D-498C-A6B7-8CAAA70A5083}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Ex03.GarageLogic</RootNamespace>
     <AssemblyName>Ex03.GarageLogic</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -13,7 +13,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -31,5 +31,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CustomerInfo.cs" />
+    <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
+    <Compile Include="Exceptions\VehicleAlreadyExistsException.cs" />
+    <Compile Include="Garage.cs" />
+    <Compile Include="GarageProperties\CarProperties.cs" />
+    <Compile Include="GarageProperties\MotorcycleProperties.cs" />
+    <Compile Include="GarageProperties\TruckProperties.cs" />
+    <Compile Include="GarageProperties\VehicleProperties.cs" />
+    <Compile Include="VehicleGenerator.cs" />
+    <Compile Include="VehicleParts\ElectricEngine.cs" />
+    <Compile Include="VehicleParts\EnergySource.cs" />
+    <Compile Include="VehicleParts\FuelEngine.cs" />
+    <Compile Include="VehicleParts\Wheel.cs" />
+    <Compile Include="Vehicles\Car.cs" />
+    <Compile Include="Vehicles\Motorcycle.cs" />
+    <Compile Include="Vehicles\Truck.cs" />
+    <Compile Include="Vehicles\Vehicle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
