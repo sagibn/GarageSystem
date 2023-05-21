@@ -16,22 +16,22 @@ namespace Ex03.GarageLogic
                 EnergySource fuelEngine = new FuelEngine(eFuelType.Octan95, i_VehicleProperties.CurrEnergy, 46f);
                 vehicle = new Car(fuelCarProperties, fuelEngine);
             }
-            else if (i_VehicleType == Garage.eVehicleTypes.ElectricCar && (i_VehicleProperties is CarProperties electricCarProperties))
+            else if(i_VehicleType == Garage.eVehicleTypes.ElectricCar && (i_VehicleProperties is CarProperties electricCarProperties))
             {
                 EnergySource electricEngine = new ElectricEngine(i_VehicleProperties.CurrEnergy, 5.2f);
                 vehicle = new Car(electricCarProperties, electricEngine);
             }
-            else if (i_VehicleType == Garage.eVehicleTypes.FuelMotorcycle && (i_VehicleProperties is MotorcycleProperties fuelMotorcycleProperties))
+            else if(i_VehicleType == Garage.eVehicleTypes.FuelMotorcycle && (i_VehicleProperties is MotorcycleProperties fuelMotorcycleProperties))
             {
                 EnergySource fuelEngine = new FuelEngine(eFuelType.Octan98,i_VehicleProperties.CurrEnergy, 6.4f);
                 vehicle = new Motorcycle(fuelMotorcycleProperties, fuelEngine);
             }
-            else if (i_VehicleType == Garage.eVehicleTypes.ElectricMotorcycle && (i_VehicleProperties is MotorcycleProperties electricMotorcycleProperties))
+            else if(i_VehicleType == Garage.eVehicleTypes.ElectricMotorcycle && (i_VehicleProperties is MotorcycleProperties electricMotorcycleProperties))
             {
                 EnergySource electricEngine = new ElectricEngine(i_VehicleProperties.CurrEnergy, 2.6f);
                 vehicle = new Motorcycle(electricMotorcycleProperties, electricEngine);
             }
-            else if (i_VehicleType == Garage.eVehicleTypes.FuelTruck && (i_VehicleProperties is TruckProperties truckProperties))
+            else if(i_VehicleType == Garage.eVehicleTypes.FuelTruck && (i_VehicleProperties is TruckProperties truckProperties))
             {
                 EnergySource fuelEngine = new FuelEngine(eFuelType.Soler, i_VehicleProperties.CurrEnergy, 135f);
                 vehicle = new Truck(truckProperties, fuelEngine);

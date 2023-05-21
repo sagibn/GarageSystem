@@ -31,7 +31,7 @@ namespace Ex03.GarageLogic
 
         public void AddFuel(float i_AmountOfFuelToAdd, eFuelType i_FuelType)
         {
-            if (!m_FuelType.Equals(i_FuelType))
+            if(!m_FuelType.Equals(i_FuelType))
             {
                 throw new ArgumentException("Provided wrong fuel type.");
             }
