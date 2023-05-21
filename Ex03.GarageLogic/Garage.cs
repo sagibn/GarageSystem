@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         }
 
         private Dictionary<string, CustomerInfo> m_CustomerListByLicenseNumber;
-        private VehicleGenerator m_VehicleGenerator;
+        private readonly VehicleGenerator m_VehicleGenerator;
         private Dictionary<int, string> m_Services;
 
         public Garage()

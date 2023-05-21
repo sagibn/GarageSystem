@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic.Exceptions
 {
     class VehicleAlreadyExistsException : Exception
     {
-        private string m_LicenseNumber;
+        private readonly string m_LicenseNumber;
         private const string m_VehicleAlreadyExistsException =
             "Vehicle with the license number of {0} is already exists.";
 
