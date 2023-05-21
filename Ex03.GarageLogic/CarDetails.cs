@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
         {
             string data = string.Format(@"Owner name:
 {1}
-Vehical status: {2}{3}",
+Vehicle status: {2}{3}",
             m_OwnerName, m_Vehicle.GetVehicleData(), m_VehicleStatus, Environment.NewLine);
 
             return data;

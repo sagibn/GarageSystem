@@ -85,11 +85,11 @@ namespace Ex03.GarageLogic
 
         public virtual string GetVehicleData()
         {
-            string vehicleData = string.Format(@"Vehicle model name: {0}
-License number: {1}
+            string vehicleData = string.Format(@"License number: {0}
+Vehicle model name: {1}
 Energy percentage: {2}
 Wheels information:
-{3}", m_ModelName, m_LicenceNumber, m_EnergyPercentage, WheelsData());
+{3}", m_LicenceNumber, m_ModelName, m_EnergyPercentage, WheelsData());
 
             return vehicleData;
         }

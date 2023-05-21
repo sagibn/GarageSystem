@@ -149,5 +149,19 @@ namespace Ex03.GarageLogic
                 electricEngine.ChargeBattery(i_MinutesToCharge / 60);
             }
         }
+
+        public string DisplayVehicleInformation(string i_LicenseNumber)
+        {
+            bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CarDetails customer);
+
+            if(!vehicleExists)
+            {
+                throw new Exception(string.Format("Vehicle with license number of {0} is not exist!", i_LicenseNumber));
+            }
+
+            string fullVehicleData = customer.ToString();
+
+            return fullVehicleData;
+        }
     }
 }
