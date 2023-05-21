@@ -135,6 +135,10 @@ namespace Ex03.GarageLogic
             {
                 electricEngine.ChargeBattery(i_MinutesToCharge / 60.0f);
             }
+            else
+            {
+                throw new Exception("Trying to recharge fuel engine.");
+            }
         }
 
         public string DisplayVehicleInformation(string i_LicenseNumber)
