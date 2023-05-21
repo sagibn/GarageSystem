@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class VehicleGenerator
+    public class VehicleGenerator
     {
         public Vehicle GenerateVehicle(Garage.eVehicleTypes i_VehicleType, VehicleProperties i_VehicleProperties)
         {
