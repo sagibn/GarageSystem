@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
             AA,
             B1
         }
-
+        
         eLicenseType m_LicenseType;
         int m_EngineCapacity;
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic.Exceptions
 {
-    class VehicleAlreadyExistsException : Exception
+    public class VehicleAlreadyExistsException : Exception
     {
         private readonly string m_LicenseNumber;
         private const string m_VehicleAlreadyExistsException =

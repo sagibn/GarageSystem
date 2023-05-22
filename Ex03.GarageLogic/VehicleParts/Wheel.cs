@@ -1,4 +1,5 @@
 ﻿using Ex03.GarageLogic.Exceptions;
+using System;
 
 namespace Ex03.GarageLogic
 {
@@ -10,6 +11,11 @@ namespace Ex03.GarageLogic
 
         public Wheel(string i_ManufactureName, float i_CurrAirPressure, float i_MaxAirPressure)
         {
+            if(i_CurrAirPressure > i_MaxAirPressure)
+            {
+                throw new ArgumentException("Current air pressure cannot be over the max air pressure that the manufacturer recommend.");
+            }
+
             m_ManufactureName = i_ManufactureName;
             m_CurrAirPressure = i_CurrAirPressure;
             m_MaxAirPressure = i_MaxAirPressure;
