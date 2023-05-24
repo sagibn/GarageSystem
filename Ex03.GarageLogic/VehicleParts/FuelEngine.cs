@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
         {
             if(!m_FuelType.Equals(i_FuelType))
             {
-                throw new ArgumentException("Provided wrong fuel type.");
+                throw new ArgumentException(string.Format("Provided wrong fuel type: provided{0}, needed{1}", i_FuelType, m_FuelType));
             }
 
             AddEnergy(i_AmountOfFuelToAdd);

@@ -16,13 +16,13 @@ namespace Ex03.GarageLogic
         }
 
         private Dictionary<string, CustomerInfo> m_CustomerListByLicenseNumber;
-        private readonly VehicleGenerator m_VehicleGenerator;
+        private readonly VehicleGenerator r_VehicleGenerator;
         private Dictionary<int, string> m_Services;
 
         public Garage()
         {
-            m_CustomerListByLicenseNumber = null;
-            m_VehicleGenerator = new VehicleGenerator();
+            m_CustomerListByLicenseNumber = new Dictionary<string,CustomerInfo>();
+            r_VehicleGenerator = new VehicleGenerator();
             m_Services = new Dictionary<int, string>
             {
                 { 1, "1. Add new vehicle to the garage." },
@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
                 throw new VehicleAlreadyExistsException(i_VehicleProperties.LicenseNumber);
             }
 
-            Vehicle vehicle = m_VehicleGenerator.GenerateVehicle(i_VehicleTypes, i_VehicleProperties);
+            Vehicle vehicle = r_VehicleGenerator.GenerateVehicle(i_VehicleTypes, i_VehicleProperties);
             CustomerInfo newCustomer = new CustomerInfo(i_OwnerName, i_PhoneNumber, vehicle);
 
             m_CustomerListByLicenseNumber.Add(newCustomer.Vehicle.LicenseNumber, newCustomer);
@@ -98,14 +98,14 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewVehicleStatus)
         {
-            CustomerInfo customer = GetCustomer(i_LicenseNumber);
+            CustomerInfo customer = getCustomer(i_LicenseNumber);
 
             customer.VehicleStatus = i_NewVehicleStatus;
         }
 
         public void InflateTiresToMax(string i_LicenseNumber)
         {
-            CustomerInfo customer = GetCustomer(i_LicenseNumber);
+            CustomerInfo customer = getCustomer(i_LicenseNumber);
 
             foreach (Wheel wheel in customer.Vehicle.Wheels)
             {
@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
 
         public void Refuel(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuelToAdd)
         {
-            CustomerInfo customer = GetCustomer(i_LicenseNumber);
+            CustomerInfo customer = getCustomer(i_LicenseNumber);
 
             if (customer.Vehicle.Engine is FuelEngine fuelEngine)
             {
@@ -129,7 +129,7 @@ namespace Ex03.GarageLogic
 
         public void Recharge(string i_LicenseNumber, float i_MinutesToCharge)
         {
-            CustomerInfo customer = GetCustomer(i_LicenseNumber);
+            CustomerInfo customer = getCustomer(i_LicenseNumber);
 
             if (customer.Vehicle.Engine is ElectricEngine electricEngine)
             {
@@ -143,13 +143,13 @@ namespace Ex03.GarageLogic
 
         public string DisplayVehicleInformation(string i_LicenseNumber)
         {
-            CustomerInfo customer = GetCustomer(i_LicenseNumber);
+            CustomerInfo customer = getCustomer(i_LicenseNumber);
             string fullVehicleData = customer.ToString();
 
             return fullVehicleData;
         }
 
-        private CustomerInfo GetCustomer(string i_LicenseNumber)
+        private CustomerInfo getCustomer(string i_LicenseNumber)
         {
             bool vehicleExists = m_CustomerListByLicenseNumber.TryGetValue(i_LicenseNumber, out CustomerInfo customer);
 

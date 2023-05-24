@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         {
             if(i_CurrAirPressure > i_MaxAirPressure)
             {
-                throw new ArgumentException("Current air pressure cannot be over the max air pressure that the manufacturer recommend.");
+                throw new ArgumentException(string.Format("Current air pressure cannot be over the max air pressure that the manufacturer recommend({0} psi).", i_MaxAirPressure));
             }
 
             m_ManufactureName = i_ManufactureName;

@@ -73,6 +73,7 @@ namespace Ex03.ConsoleUI
                     case "8":
                         return;
                     default:
+                        Console.Clear();
                         Console.WriteLine("Wrong input. Please try again.");
                         break;
                 }
@@ -91,26 +92,49 @@ namespace Ex03.ConsoleUI
             Console.Clear();
             Console.WriteLine("Please provide the license number of the car you wish to add to the garage.");
             licenseNumber = Console.ReadLine();
-            if(m_Garage.CheckIfVehicleExists(licenseNumber))
+            if (!checkLicenseNumber(licenseNumber))
             {
-                Console.WriteLine("Vehicle already exists in the garage.");
+                Console.WriteLine("Invalid license name, the name should be only alphabet charectars and numbers.");
+
             }
             else
             {
-                getInfoFromCustomer(licenseNumber, out vehicleType, out vehicleProperties
-                    , out ownerName, out PhoneNumber);
-                try
+                if (m_Garage.CheckIfVehicleExists(licenseNumber))
                 {
-                    m_Garage.AddVehicleToGarage(vehicleType, vehicleProperties, ownerName, PhoneNumber);
-                    Console.WriteLine("Added new vehicle succesfully.");
+                    Console.WriteLine("Vehicle already exists in the garage.");
                 }
-                catch(Exception ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
+                    getInfoFromCustomer(licenseNumber, out vehicleType, out vehicleProperties
+                        , out ownerName, out PhoneNumber);
+                    try
+                    {
+                        m_Garage.AddVehicleToGarage(vehicleType, vehicleProperties, ownerName, PhoneNumber);
+                        Console.WriteLine("Added new vehicle succesfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Faild to add new car to garage- reason:");
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
 
+        private bool checkLicenseNumber(string i_LicenseNumber)
+        {
+            bool validLicenseNumber = true;
+
+            foreach(char c in i_LicenseNumber)
+            {
+                if (!char.IsLetterOrDigit(c))
+                {
+                    validLicenseNumber = false;
+                }
+            }
+
+            return validLicenseNumber;
+        }
         private void getInfoFromCustomer(string i_LicensePlate, out Garage.eVehicleTypes io_VehicleType,
             out VehicleProperties io_VehicleProperties, out string io_OwnerName, out string io_PhoneNumber)
         {
@@ -118,10 +142,24 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    getOwnerPhoneAndName(out io_PhoneNumber, out io_OwnerName);
+                    getOwnerName(out io_OwnerName);
                     break;
                 }
                 catch(FormatException ex)
+                {
+                    Console.Clear();
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            while (true)
+            {
+                try
+                {
+                    getOwnerPhone(out io_PhoneNumber);
+                    break;
+                }
+                catch (FormatException ex)
                 {
                     Console.Clear();
                     Console.WriteLine(ex.Message);
@@ -172,9 +210,9 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("For fuel motorcycle please press 3.");
             Console.WriteLine("For electric motorcycle please press 4.");
             Console.WriteLine("For truck please press 5.");
-            userInput = Console.ReadLine();
             while (!vehicleType.HasValue)
             {
+                userInput = Console.ReadLine();
                 switch (userInput)
                 {
                     case "1":
@@ -201,18 +239,21 @@ namespace Ex03.ConsoleUI
             return vehicleType.Value;
         }
 
-        private void getOwnerPhoneAndName(out string io_OwnerPhone, out string io_OwnerName)
+        private void getOwnerName(out string io_OwnerName)
         {
             Console.WriteLine("Please provide the owner's name:");
             io_OwnerName = Console.ReadLine();
-            if(!validateCustomerName(io_OwnerName))
+            if (!validateCustomerName(io_OwnerName))
             {
                 throw new FormatException("Invalid customer name, please provide a valid name.");
             }
+        }
 
+        private void getOwnerPhone(out string io_OwnerPhone)
+        {
             Console.WriteLine("Please provide owner's Phone - a 10 digit IL valid number.");
             io_OwnerPhone = Console.ReadLine();
-            if(!validateCustomerPhoneNumber(io_OwnerPhone))
+            if (!validateCustomerPhoneNumber(io_OwnerPhone))
             {
                 throw new FormatException("Please provide a valid phone number.");
             }
@@ -270,7 +311,6 @@ namespace Ex03.ConsoleUI
 
             getBasicInfoAboutVehicle(out modelName, out wheelManufactureName, out wheelCurrAirPressure
                 , out currEnergy);
-
             carColor = getCarColor();
 
             return new CarProperties(numOfDoors, carColor, modelName, i_LicensePlate, wheelManufactureName, wheelCurrAirPressure, currEnergy);
@@ -341,13 +381,13 @@ namespace Ex03.ConsoleUI
             return new MotorcycleProperties(licenseType, engineCapacity, modelName, i_LicensePlate, wheelManufactureName, wheelCurrAirPressure, currEnergy);
         }
 
-        private bool validateStringContainsOnlyAlphbet(string i_StringToCheck)
+        private bool validateStringContainsOnlyAlphbetOrDigit(string i_StringToCheck)
         {
             bool validString = true;
 
             foreach(char c in i_StringToCheck)
             {
-                if(c < 'a' || 'z' < c && c < 'A' || 'Z' < c)
+                if(!char.IsLetterOrDigit(c))
                 {
                     validString = false;
                 }
@@ -437,33 +477,60 @@ namespace Ex03.ConsoleUI
             out float io_WheelCurrAirPressure, out float io_CurrEnerg)
         {
             string userInput;
-
-            Console.WriteLine("Please provide the model name:");
-            io_ModelName = Console.ReadLine();
-            if(!validateStringContainsOnlyAlphbet(io_ModelName))
+            while (true)
             {
-                throw new ArgumentException("Model name must be a Alphbet valid name.");
+                Console.WriteLine("Please provide the model name:");
+                io_ModelName = Console.ReadLine();
+                if(!validateStringContainsOnlyAlphbetOrDigit(io_ModelName))
+                {
+                    Console.WriteLine("Model name must be made of alphabet and or digits.");
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            Console.WriteLine("Please provide the wheel manufacture name:");
-            io_WheelManufactureName = Console.ReadLine();
-            if(!validateStringContainsOnlyAlphbet(io_WheelManufactureName))
+            while(true)
             {
-                throw new ArgumentException("Wheel manufacture name must be a Alphbet valid name.");
+                Console.WriteLine("Please provide the wheel manufacture name:");
+                io_WheelManufactureName = Console.ReadLine();
+                if(!validateStringContainsOnlyAlphbetOrDigit(io_WheelManufactureName))
+                {
+                    Console.WriteLine("Wheel manufacture name must be made of alphabet and or digits.");
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            Console.WriteLine("Please provide the wheel current air pressure:");
-            userInput = Console.ReadLine();
-            if(!float.TryParse(userInput, out io_WheelCurrAirPressure))
+            while (true)
             {
-                throw new FormatException("Air pressure must be a floating number.");
+                Console.WriteLine("Please provide the wheel current air pressure(Cannot be above the recommended):");
+                userInput = Console.ReadLine();
+                if(!float.TryParse(userInput, out io_WheelCurrAirPressure))
+                {
+                    Console.WriteLine("Air pressure must be a floating number");
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            Console.WriteLine("Please provide the current energy(amount of fuel / battery time):");
-            userInput = Console.ReadLine();
-            if(!float.TryParse(userInput, out io_CurrEnerg))
+            while (true)
             {
-                throw new FormatException("Energy must be a float.");
+                Console.WriteLine("Please provide the current energy(amount of fuel(Liters) / battery time(Hours)):");
+                userInput = Console.ReadLine();
+                if (!float.TryParse(userInput, out io_CurrEnerg))
+                {
+                    Console.WriteLine("Energy must be a floating number.");
+                }
+                else
+                {
+                    break;
+                }
             }
         }
         private void containsHazardElements(out bool io_HazardElements)
@@ -609,21 +676,6 @@ namespace Ex03.ConsoleUI
             io_VehicleStatus = vehicleStatus.Value;
         }
 
-        private bool getValidIntFromUserInRange(out int io_UserInput, int i_MinValue, int i_MaxValue)
-        {
-            if(int.TryParse(Console.ReadLine(), out io_UserInput) == false)
-            {
-                throw new FormatException();
-            }
-
-            if(io_UserInput < i_MinValue || io_UserInput > i_MaxValue)
-            {
-                throw new ValueOutOfRangeException(i_MinValue, i_MaxValue, io_UserInput);
-            }
-
-            return true;
-        }
-
         private bool getValidFloatFromUserInRange(out float io_UserInput, float i_MinValue, float i_MaxValue)
         {
             if(float.TryParse(Console.ReadLine(), out io_UserInput) == false)
@@ -727,7 +779,7 @@ namespace Ex03.ConsoleUI
             float capacityInput = 0;
             bool validInput = false;
 
-            Console.WriteLine("Enter how much fuel you want to add:");
+            Console.WriteLine("Enter how much fuel you want to add(Liters):");
             while(!validInput)
             {
                 try
@@ -767,7 +819,7 @@ namespace Ex03.ConsoleUI
             float timeInput = 0;
             bool validInput = false;
 
-            Console.WriteLine("Enter how much time you want to add to the battery (hours):");
+            Console.WriteLine("Enter how much time you want to add to the battery (minutes):");
             while(!validInput)
             {
                 try
@@ -786,13 +838,15 @@ namespace Ex03.ConsoleUI
         private void displayVehicleInfo()
         {
             string licensePlate;
+            string displayVehicleInfo;
 
             Console.Clear();
             Console.WriteLine("Please provide the license plate.");
             licensePlate = Console.ReadLine();
             try
             {
-                m_Garage.DisplayVehicleInformation(licensePlate);
+                displayVehicleInfo = m_Garage.DisplayVehicleInformation(licensePlate);
+                Console.WriteLine(displayVehicleInfo);
             }
             catch(Exception ex)
             {
