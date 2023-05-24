@@ -69,15 +69,17 @@ namespace Ex03.GarageLogic
             }
         }
 
-        private StringBuilder WheelsData()
+        private StringBuilder wheelsData()
         {
             StringBuilder wheelsData = new StringBuilder();
-            string data = null;
+            string data = string.Empty;
+            int wheelNumber = 1;
 
             foreach(Wheel wheel in Wheels)
             {
-                data = string.Format("Wheel number {0} - {1}{2}", wheel.ToString(), Environment.NewLine);
+                data = string.Format("Wheel number {0} - {1}{2}", wheelNumber, wheel.ToString(), Environment.NewLine);
                 wheelsData.Append(data);
+                wheelNumber++;
             }
 
             return wheelsData;
@@ -87,9 +89,8 @@ namespace Ex03.GarageLogic
         {
             string vehicleData = string.Format(@"License number: {0}
 Vehicle model name: {1}
-Energy percentage: {2}
 Wheels information:
-{3}", m_LicenseNumber, m_ModelName, m_EnergyPercentage, WheelsData());
+{2}", m_LicenseNumber, m_ModelName, wheelsData());
 
             return vehicleData;
         }

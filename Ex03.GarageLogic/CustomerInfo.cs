@@ -76,7 +76,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string data = string.Format(@"Owner name:
+            string data = string.Format(@"Owner name: {0}
 {1}
 Vehicle status: {2}{3}",
             m_OwnerName, m_Vehicle.GetVehicleData(), m_VehicleStatus, Environment.NewLine);
